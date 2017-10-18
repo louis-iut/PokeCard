@@ -6,16 +6,16 @@ class User
 {
     protected $id;
 
-    protected $nom;
+    protected $lastname;
 
-    protected $prenom;
+    protected $firstname;
 
-    public function __construct($id, $nom, $prenom)
+    public function __construct($id, $lastname, $firstname)
     {
 
         $this->id = $id;
-        $this->prenom = $prenom;
-        $this->nom = $nom;  
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;  
 
     }
 
@@ -24,35 +24,35 @@ class User
         $this->id = $id;
     }
 
-    public function setNom($nom)
+    public function setLastname($lastname)
     {
-        $this->nom = $nom;
+        $this->lastname = $lastname;
     }
 
-    public function setPrenom($prenom)
+    public function setFirstname($firstname)
     {
-        $this->prenom = $prenom;
+        $this->firstname = $firstname;
     }
 
     public function getId()
     {
         return $this->id;
     }
-    public function getPrenom()
+    public function getFirstname()
     {
-        return $this->prenom;
+        return $this->firstname;
     }
-    public function getNom()
+    public function getLastname()
     {
-        return $this->nom;
+        return $this->lastname;
     }
 
     public function toArray()
     {
         $array = array();
         $array['id'] = $this->id;
-        $array['nom'] = $this->nom;
-        $array['prenom'] = $this->prenom;
+        $array['lastname'] = $this->lastname;
+        $array['firstname'] = $this->firstname;
 
         return $array;
     }

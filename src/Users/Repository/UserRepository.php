@@ -41,12 +41,25 @@ class UserRepository
        $statement = $queryBuilder->execute();
        $usersData = $statement->fetchAll();
        foreach ($usersData as $userData) {
-           $userEntityList[$userData['id']] = new User($userData['id'], $userData['nom'], $userData['prenom']);
+           $userEntityList[$userData['id']] = new User($userData['id'], $userData['lastname'], $userData['firstname']);
        }
 
        return $userEntityList;
    }
 
+   public function getAllJSON()
+   {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('u.*')
+            ->from('users', 'u');
+ 
+        $statement = $queryBuilder->execute();
+        $usersData = $statement->fetchAll();
+ 
+        return $usersData;
+
+   }   
    /**
     * Returns an User object.
     *
@@ -66,7 +79,7 @@ class UserRepository
        $statement = $queryBuilder->execute();
        $userData = $statement->fetchAll();
 
-       return new User($userData[0]['id'], $userData[0]['nom'], $userData[0]['prenom']);
+       return new User($userData[0]['id'], $userData[0]['lastname'], $userData[0]['firstname']);
    }
 
     public function delete($id)
@@ -88,16 +101,16 @@ class UserRepository
           ->where('id = :id')
           ->setParameter(':id', $parameters['id']);
 
-        if ($parameters['nom']) {
+        if ($parameters['lastname']) {
             $queryBuilder
-              ->set('nom', ':nom')
-              ->setParameter(':nom', $parameters['nom']);
+              ->set('lastname', ':lastname')
+              ->setParameter(':lastname', $parameters['lastname']);
         }
 
-        if ($parameters['prenom']) {
+        if ($parameters['firstname']) {
             $queryBuilder
-            ->set('prenom', ':prenom')
-            ->setParameter(':prenom', $parameters['prenom']);
+            ->set('firstname', ':firstname')
+            ->setParameter(':firstname', $parameters['firstname']);
         }
 
         $statement = $queryBuilder->execute();
@@ -110,12 +123,12 @@ class UserRepository
           ->insert('users')
           ->values(
               array(
-                'nom' => ':nom',
-                'prenom' => ':prenom'
+                'lastname' => ':lastname',
+                'firstname' => ':firstname'
               )
           )
-          ->setParameter(':nom', $parameters['nom'])
-          ->setParameter(':prenom', $parameters['prenom'])
+          ->setParameter(':lastname', $parameters['lastname'])
+          ->setParameter(':firstname', $parameters['firstname']);
         $statement = $queryBuilder->execute();
     }
 }
