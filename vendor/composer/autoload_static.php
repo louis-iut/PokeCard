@@ -40,17 +40,13 @@ class ComposerStaticInita044f7ab415eb46d3dd192eb779f560a
         ),
         'A' => 
         array (
-            'App\\Users\\Service\\' => 18,
             'App\\Users\\Repository\\' => 21,
             'App\\Users\\Entity\\' => 17,
             'App\\Users\\Controller\\' => 21,
             'App\\Users\\' => 10,
-            'App\\Tests\\' => 10,
-            'App\\Computers\\Service\\' => 22,
-            'App\\Computers\\Repository\\' => 25,
-            'App\\Computers\\Entity\\' => 21,
-            'App\\Computers\\Controller\\' => 25,
-            'App\\Computers\\' => 14,
+            'App\\Pokemons\\Repository\\' => 24,
+            'App\\Pokemons\\Controller\\' => 24,
+            'App\\Pokemons\\' => 13,
         ),
     );
 
@@ -115,10 +111,6 @@ class ComposerStaticInita044f7ab415eb46d3dd192eb779f560a
         array (
             0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
         ),
-        'App\\Users\\Service\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Users/Service',
-        ),
         'App\\Users\\Repository\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Users/Repository',
@@ -135,29 +127,17 @@ class ComposerStaticInita044f7ab415eb46d3dd192eb779f560a
         array (
             0 => __DIR__ . '/../..' . '/src/Users',
         ),
-        'App\\Tests\\' => 
+        'App\\Pokemons\\Repository\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/tests',
+            0 => __DIR__ . '/../..' . '/src/Pokemons/Repository',
         ),
-        'App\\Computers\\Service\\' => 
+        'App\\Pokemons\\Controller\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/Computers/Service',
+            0 => __DIR__ . '/../..' . '/src/Pokemons/Controller',
         ),
-        'App\\Computers\\Repository\\' => 
+        'App\\Pokemons\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/Computers/Repository',
-        ),
-        'App\\Computers\\Entity\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Computers/Entity',
-        ),
-        'App\\Computers\\Controller\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Computers/Controller',
-        ),
-        'App\\Computers\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Computers',
+            0 => __DIR__ . '/../..' . '/src/Pokemons',
         ),
     );
 
