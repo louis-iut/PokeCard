@@ -68,5 +68,7 @@ Temporary Items
 # Build data
 /build/
 
+/config/dev.php
+
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
