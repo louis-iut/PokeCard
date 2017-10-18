@@ -17,14 +17,10 @@
          "App\\Users\\Controller\\": "src/Users/Controller/",
          "App\\Users\\Repository\\": "src/Users/Repository/",
          "App\\Users\\Entity\\": "src/Users/Entity/",
-         "App\\Users\\Service\\": "src/Users/Service/",
-         "App\\Tests\\": "tests/",
 
-         "App\\Computers\\": "src/Computers/",
-         "App\\Computers\\Controller\\": "src/Computers/Controller/",
-         "App\\Computers\\Repository\\": "src/Computers/Repository/",
-         "App\\Computers\\Entity\\": "src/Computers/Entity/",
-         "App\\Computers\\Service\\": "src/Computers/Service/"
+         "App\\Pokemons\\": "src/Pokemons/",         
+         "App\\Pokemons\\Controller\\": "src/Pokemons/Controller/",
+         "App\\Pokemons\\Repository\\": "src/Pokemons/Repository/"
        }
    }
 }
