@@ -4,9 +4,20 @@ namespace App\Users\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class IndexController
 {
+
+    public function testjson(Request $request, Application $app){
+
+        $users = $app['repository.user']->getAllJSON();
+        $content = json_encode($users);
+        $statutCode = 200;
+
+        return new Response($content, $statutCode ,['Content-type' => 'application/json']);
+    }
+
     public function listAction(Request $request, Application $app)
     {
         $users = $app['repository.user']->getAll();

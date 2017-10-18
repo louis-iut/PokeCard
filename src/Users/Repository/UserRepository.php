@@ -47,6 +47,19 @@ class UserRepository
        return $userEntityList;
    }
 
+   public function getAllJSON()
+   {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('u.*')
+            ->from('users', 'u');
+ 
+        $statement = $queryBuilder->execute();
+        $usersData = $statement->fetchAll();
+ 
+        return $usersData;
+
+   }   
    /**
     * Returns an User object.
     *
