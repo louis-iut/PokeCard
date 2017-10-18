@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class IndexController
 {
 
-    public function testjson(Request $request, Application $app){
+    public function getUsers(Request $request, Application $app){
 
         $users = $app['repository.user']->getAllJSON();
         $content = json_encode($users);
@@ -17,7 +17,7 @@ class IndexController
 
         return new Response($content, $statutCode ,['Content-type' => 'application/json']);
     }
-
+/*
     public function listAction(Request $request, Application $app)
     {
         $users = $app['repository.user']->getAll();
@@ -57,5 +57,5 @@ class IndexController
     {
         return $app['twig']->render('users.form.html.twig');
     }
-
+*/
 }
