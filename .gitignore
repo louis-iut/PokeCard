@@ -72,3 +72,6 @@ Temporary Items
 
 # Backup entities generated with doctrine:generate:entities command
 **/Entity/*~
+vendor/composer/autoload_static.php
+vendor/composer/autoload_psr4.php
+config/dev.php
