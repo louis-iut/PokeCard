@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Pokemons\Controller;
+namespace App\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class IndexController
+class PokemonController
 {
 
     public function getPokemons(Request $request, Application $app){
