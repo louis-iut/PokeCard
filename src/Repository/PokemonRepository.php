@@ -34,6 +34,27 @@ class PokemonRepository
        return $pokemonList;
    }
 
+   public function getAllID()
+   {
+
+        $json_url = "https://pokeapi.co/api/v2/pokedex/1/";
+        $json = file_get_contents($json_url);
+        $data = json_decode($json, TRUE);
+
+        $pokemonList = $data['pokemon_entries'];
+
+        $pokemonIDArray = array();
+
+        foreach ($pokemonList as $pokemon) {
+            //$pokemonData = json_decode($pokemon, TRUE);
+            array_push($pokemonIDArray, $pokemon['entry_number']);
+        }
+
+       return $pokemonIDArray;
+   }
+
+
+
    public function getById($id) {
  
        $json_url = "https://pokeapi.co/api/v2/pokemon-species/{$id}/";
