@@ -200,3 +200,10 @@
 127.0.0.1 - - [08/Dec/2017:14:08:32 +0100] "GET /index.php/pokemons HTTP/1.1" 200 204
 127.0.0.1 - - [08/Dec/2017:14:08:32 +0100] "GET /index.php/pokemons HTTP/1.1" 200 204
 127.0.0.1 - - [08/Dec/2017:14:09:20 +0100] "GET /index.php/pokemons HTTP/1.1" 200 93806
+127.0.0.1 - - [08/Dec/2017:14:11:53 +0100] "GET / HTTP/1.1" 404 34473
+127.0.0.1 - - [08/Dec/2017:14:11:55 +0100] "GET /index.php/pokemons/fr HTTP/1.1" 404 34517
+127.0.0.1 - - [08/Dec/2017:14:11:57 +0100] "GET /index.php/pokemons HTTP/1.1" 200 93806
+127.0.0.1 - - [08/Dec/2017:14:12:04 +0100] "GET /index.php/fr/pokemons/45 HTTP/1.1" 404 34529
+127.0.0.1 - - [08/Dec/2017:14:12:21 +0100] "GET /index.php/fr/pokemon/45 HTTP/1.1" 200 302
+127.0.0.1 - - [08/Dec/2017:12:35:54 +0100] "GET /index.php/fr/pokemons HTTP/1.1" 200 833
+127.0.0.1 - - [08/Dec/2017:14:13:05 +0100] "GET /index.php/fr/pokemon/45 HTTP/1.1" 200 129

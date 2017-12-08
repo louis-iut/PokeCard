@@ -61,7 +61,7 @@ class PokemonRepository
 
        $pokemonID = $data['id'];
        $pokemonNames = $data['names'];
-       $pokemonImageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$pokemon['entry_number']}.png";
+       $pokemonImageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$id}.png";
        foreach ($pokemonNames as $pokemonName) {
             if ($pokemonName["language"]["name"] == $code) {
                 $selectedPokemonName = $pokemonName["name"];
