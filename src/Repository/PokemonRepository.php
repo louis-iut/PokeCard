@@ -22,17 +22,6 @@ class PokemonRepository
         $this->db = $db;
     }
 
-   /**
-    * Returns a collection of users.
-    * @param int $limit
-    *   The number of users to return.
-    * @param int $offset
-    *   The number of users to skip.
-    * @param array $orderBy
-    *   Optionally, the order by info, in the $column => $direction format.
-    * @return array A collection of users, keyed by user id.
-    */
-    
    public function getAll()
    {
 
@@ -43,6 +32,33 @@ class PokemonRepository
         $pokemonList = $data['pokemon_entries'];
         
        return $pokemonList;
+   }
+
+   public function getById($id) {
+ 
+       $json_url = "https://pokeapi.co/api/v2/pokemon-species/{$id}/";
+       $json = file_get_contents($json_url);
+       $data = json_decode($json, TRUE);
+
+       $pokemonID = $data['id'];
+       $pokemonNames = $data['names'];
+
+       var_dump($pokemonNames); die;
+
+   }
+
+    public function getPokemonWithURL($url)
+   {
+       $json_url = $url;
+       $json = file_get_contents($json_url);
+       $data = json_decode($json, TRUE);
+
+       $pokemonID = $data['id'];
+       $pokemonNames = $data['names'];
+
+       var_dump($pokemonNames); die;
+
+       //return $newPokemon;
    }
 }
 

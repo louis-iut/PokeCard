@@ -40,13 +40,9 @@ class ComposerStaticInita044f7ab415eb46d3dd192eb779f560a
         ),
         'A' => 
         array (
-            'App\\Users\\Repository\\' => 21,
-            'App\\Users\\Entity\\' => 17,
-            'App\\Users\\Controller\\' => 21,
-            'App\\Users\\' => 10,
-            'App\\Pokemons\\Repository\\' => 24,
-            'App\\Pokemons\\Controller\\' => 24,
-            'App\\Pokemons\\' => 13,
+            'App\\Repository\\' => 15,
+            'App\\Entity\\' => 11,
+            'App\\Controller\\' => 15,
         ),
     );
 
@@ -111,33 +107,17 @@ class ComposerStaticInita044f7ab415eb46d3dd192eb779f560a
         array (
             0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
         ),
-        'App\\Users\\Repository\\' => 
+        'App\\Repository\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/Users/Repository',
+            0 => __DIR__ . '/../..' . '/src/Repository',
         ),
-        'App\\Users\\Entity\\' => 
+        'App\\Entity\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/Users/Entity',
+            0 => __DIR__ . '/../..' . '/src/Entity',
         ),
-        'App\\Users\\Controller\\' => 
+        'App\\Controller\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/Users/Controller',
-        ),
-        'App\\Users\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Users',
-        ),
-        'App\\Pokemons\\Repository\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Pokemons/Repository',
-        ),
-        'App\\Pokemons\\Controller\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Pokemons/Controller',
-        ),
-        'App\\Pokemons\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Pokemons',
+            0 => __DIR__ . '/../..' . '/src/Controller',
         ),
     );
 

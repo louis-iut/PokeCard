@@ -5,9 +5,7 @@ namespace App\Entity;
 class User
 {
     protected $id;
-
     protected $name;
-
     protected $imageUrl;
 
     /**
