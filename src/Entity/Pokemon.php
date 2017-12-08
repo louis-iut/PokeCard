@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-class User
+class Pokemon
 {
     protected $id;
     protected $name;
     protected $imageUrl;
 
     /**
-     * User constructor.
+     * Pokemon constructor.
      * @param $id
      * @param $name
      * @param $imageUrl
@@ -67,5 +67,15 @@ class User
     public function setImageUrl($imageUrl)
     {
         $this->imageUrl = $imageUrl;
+    }
+
+    public function toArray()
+    {
+        $array = array();
+        $array['id'] = $this->id;
+        $array['name'] = $this->name;
+        $array['imageURL'] = $this->imageUrl;
+
+        return $array;
     }
 }

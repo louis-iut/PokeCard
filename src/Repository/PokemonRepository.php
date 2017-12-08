@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Pokemon;
 use Doctrine\DBAL\Connection;
 
 /**
@@ -31,7 +32,7 @@ class PokemonRepository
 
         $pokemonList = $data['pokemon_entries'];
         
-       return $pokemonList;
+        return $pokemonList;
    }
 
    public function getAllID()
@@ -46,40 +47,30 @@ class PokemonRepository
         $pokemonIDArray = array();
 
         foreach ($pokemonList as $pokemon) {
-            //$pokemonData = json_decode($pokemon, TRUE);
             array_push($pokemonIDArray, $pokemon['entry_number']);
         }
 
        return $pokemonIDArray;
    }
 
-
-
-   public function getById($id) {
- 
+    public function getById($id, $code)
+    {
        $json_url = "https://pokeapi.co/api/v2/pokemon-species/{$id}/";
        $json = file_get_contents($json_url);
        $data = json_decode($json, TRUE);
 
        $pokemonID = $data['id'];
        $pokemonNames = $data['names'];
+       $pokemonImageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$pokemon['entry_number']}.png";
+       foreach ($pokemonNames as $pokemonName) {
+            if ($pokemonName["language"]["name"] == $code) {
+                $selectedPokemonName = $pokemonName["name"];
+            }
+       }
 
-       var_dump($pokemonNames); die;
-
-   }
-
-    public function getPokemonWithURL($url)
-   {
-       $json_url = $url;
-       $json = file_get_contents($json_url);
-       $data = json_decode($json, TRUE);
-
-       $pokemonID = $data['id'];
-       $pokemonNames = $data['names'];
-
-       var_dump($pokemonNames); die;
-
-       //return $newPokemon;
+       $newPokemon = new Pokemon($pokemonID, $selectedPokemonName, $pokemonImageURL);
+       
+       return $newPokemon;
    }
 }
 
