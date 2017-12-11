@@ -14,21 +14,23 @@ class PokemonController
     {
         $parameters = $request->attributes->all();
         $page = $_GET['page'];
+        $maxPokemon = $_GET['number'];
+
         $pokemons = $app['repository.pokemon']->getAll();
         $statutCode = 200;
         $pokemonArray = array();
 
-        $maxPokemon = 20;
-
-        for ($i=($maxPokemon*$page); $i < ($maxPokemon*$page)+20; $i++) { 
-
-            $pokemonID = $pokemons[$i]['entry_number'];
-            $pokemonName = $pokemons[$i]['pokemon_species']['name'];
-            $pokemonImageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$pokemonID}.png";
-            $pokemonDetailsRoute = "pokecard.local/index.php/en/pokemon/{$pokemonID}";
-
-             $newPokemon = new Pokemon($pokemonID, $pokemonName, $pokemonImageURL, $pokemonDetailsRoute);
-             array_push($pokemonArray, $newPokemon->toArray()); 
+        for ($i=($maxPokemon*$page); $i < ($maxPokemon*($page+1)); $i++) { 
+            if (!empty($pokemons[$i])) {
+                $pokemonID = $pokemons[$i]['entry_number'];
+                $pokemonName = $pokemons[$i]['pokemon_species']['name'];
+                $pokemonImageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$pokemonID}.png";
+                $pokemonDetailsRoute = "pokecard.local/index.php/en/pokemon/{$pokemonID}";
+                $newPokemon = new Pokemon($pokemonID, $pokemonName, $pokemonImageURL, $pokemonDetailsRoute);
+                array_push($pokemonArray, $newPokemon->toArray()); 
+            } else {
+                break;
+            }
         }
 
             $content = json_encode($pokemonArray);

@@ -64,7 +64,7 @@ class PokemonRepository
        $pokemonNames = $data['names'];
        $habitat = $data['habitat']['name'];
        $color = $data['color']['name'];
-       $description = $this->getDescription($data);
+       $description = $this->getDescription($data, $code);
 
        $pokemonImageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$id}.png";
 
@@ -75,15 +75,14 @@ class PokemonRepository
        }
 
        $newPokemon = new PokemonDetails($pokemonID, $selectedPokemonName, $pokemonImageURL, $habitat, $color, $description);
-       
        return $newPokemon;
    }
 
-  public function getDescription($json)
+  public function getDescription($json, $code)
   {
     $descriptions = $json['flavor_text_entries'];
     foreach ($descriptions as $description) {
-      if ($description['language']['name'] == "en") {
+      if ($description['language']['name'] == $code) {
         return $description['flavor_text'];
       }
     }
