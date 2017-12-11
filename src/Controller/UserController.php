@@ -20,4 +20,13 @@ class UserController
         return new JsonResponse($app['repository.user']->getAll());
     }
 
+    public function login(Request $request, Application $app) {
+
+        $parameters = json_decode(file_get_contents('php://input'), true);
+        var_dump($parameters);
+        die();
+        $user = $app['repository.user']->getByEmail($parameters['email']);
+        die();
+    }
+
 }
