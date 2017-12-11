@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Pokemon;
+use App\Entity\PokemonDetails;
 use Doctrine\DBAL\Connection;
 
 /**
@@ -61,16 +62,31 @@ class PokemonRepository
 
        $pokemonID = $data['id'];
        $pokemonNames = $data['names'];
+       $habitat = $data['habitat']['name'];
+       $color = $data['color']['name'];
+       $description = $this->getDescription($data);
+
        $pokemonImageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$id}.png";
+
        foreach ($pokemonNames as $pokemonName) {
             if ($pokemonName["language"]["name"] == $code) {
                 $selectedPokemonName = $pokemonName["name"];
             }
        }
 
-       $newPokemon = new Pokemon($pokemonID, $selectedPokemonName, $pokemonImageURL);
+       $newPokemon = new PokemonDetails($pokemonID, $selectedPokemonName, $pokemonImageURL, $habitat, $color, $description);
        
        return $newPokemon;
    }
+
+  public function getDescription($json)
+  {
+    $descriptions = $json['flavor_text_entries'];
+    foreach ($descriptions as $description) {
+      if ($description['language']['name'] == "en") {
+        return $description['flavor_text'];
+      }
+    }
+  }
 }
 
