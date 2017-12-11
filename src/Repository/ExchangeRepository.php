@@ -53,4 +53,21 @@ class ExchangeRepository
        return $exchangeEntityList;
    }
 
+
+   public function getById($id)
+  {
+    $queryBuilder = $this->db->createQueryBuilder();
+    $queryBuilder
+      ->select('e.*')
+      ->from('exchange', 'e')
+      ->where('id = ?')
+      ->setParameter(0, $id);
+      $statement = $queryBuilder->execute();
+      $exchangeData = $statement->fetchAll();
+
+      return new Exchange($exchangeData[0]['id'], $exchangeData[0]['userID'], $exchangeData[0]['firstPokemonID'], $exchangeData[0]['secondPokemonID'], $exchangeData[0]['date']);
+   }
+
+
+
 }

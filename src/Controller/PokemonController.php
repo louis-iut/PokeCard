@@ -47,7 +47,8 @@ class PokemonController
         return new Response($content, $statutCode ,['Content-type' => 'application/json']);
     }
 
-    public function getPokemonWithID(Request $request, Application $app){
+    public function getPokemonWithID(Request $request, Application $app)
+    {
 
         $parameters = $request->attributes->all();
         $pokemons = $app['repository.pokemon']->getById($parameters['id'], $parameters['code']);

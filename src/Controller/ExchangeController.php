@@ -19,4 +19,16 @@ class ExchangeController
 
         return new Response($content, $statutCode ,['Content-type' => 'application/json']); 
     }
+
+
+    public function getExchangeWithID(Request $request, Application $app)
+    {
+
+    	$parameters = $request->attributes->all();
+        $exchange = $app['repository.exchange']->getById($parameters['id']);
+        $content = json_encode($exchange->toArray());
+        $statutCode = 200;
+
+        return new Response($content, $statutCode ,['Content-type' => 'application/json']);
+    }
 }
