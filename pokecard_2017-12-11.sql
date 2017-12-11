@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Hôte: 127.0.0.1 (MySQL 5.5.5-10.1.26-MariaDB)
+# Hôte: 127.0.0.1 (MySQL 5.6.35)
 # Base de données: pokecard
-# Temps de génération: 2017-10-18 10:25:50 +0000
+# Temps de génération: 2017-12-11 12:51:02 +0000
 # ************************************************************
 
 
@@ -20,12 +20,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
-# Affichage de la table Users
+# Affichage de la table exchange
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `Users`;
+DROP TABLE IF EXISTS `exchange`;
 
-CREATE TABLE `Users` (
+CREATE TABLE `exchange` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `userID` int(11) DEFAULT NULL,
+  `firstPokemonID` int(11) DEFAULT NULL,
+  `secondPokemonID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+# Affichage de la table user
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `lastname` varchar(50) DEFAULT NULL,
   `firstname` varchar(50) DEFAULT NULL,
@@ -33,6 +48,20 @@ CREATE TABLE `Users` (
   `pseudo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Affichage de la table user_has_pokemons
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `user_has_pokemons`;
+
+CREATE TABLE `user_has_pokemons` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `userID` int(11) DEFAULT NULL,
+  `pokemonID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 

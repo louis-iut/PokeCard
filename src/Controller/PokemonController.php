@@ -22,19 +22,21 @@ class PokemonController
 
         for ($i=($maxPokemon*$page); $i < ($maxPokemon*($page+1)); $i++) { 
             if (!empty($pokemons[$i])) {
+
                 $pokemonID = $pokemons[$i]['entry_number'];
                 $pokemonName = $pokemons[$i]['pokemon_species']['name'];
                 $pokemonImageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$pokemonID}.png";
                 $pokemonDetailsRoute = "pokecard.local/index.php/en/pokemon/{$pokemonID}";
                 $newPokemon = new Pokemon($pokemonID, $pokemonName, $pokemonImageURL, $pokemonDetailsRoute);
                 array_push($pokemonArray, $newPokemon->toArray()); 
+                
             } else {
                 break;
             }
         }
 
-            $content = json_encode($pokemonArray);
-            return new Response($content, $statutCode ,['Content-type' => 'application/json']); 
+        $content = json_encode($pokemonArray);
+        return new Response($content, $statutCode ,['Content-type' => 'application/json']); 
     }
 
 
@@ -47,7 +49,8 @@ class PokemonController
         return new Response($content, $statutCode ,['Content-type' => 'application/json']);
     }
 
-    public function getPokemonWithID(Request $request, Application $app){
+    public function getPokemonWithID(Request $request, Application $app)
+    {
 
         $parameters = $request->attributes->all();
         $pokemons = $app['repository.pokemon']->getById($parameters['id'], $parameters['code']);
