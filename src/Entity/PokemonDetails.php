@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-class Pokemon
+class PokemonDetails
 {
     protected $id;
     protected $name;
     protected $imageUrl;
-    protected $detailsRoute;
+    protected $habitat;
+    protected $color;
+    protected $description;
 
     /**
      * Pokemon constructor.
@@ -15,12 +17,15 @@ class Pokemon
      * @param $name
      * @param $imageUrl
      */
-    public function __construct($id, $name, $imageUrl, $detailsRoute)
+    public function __construct($id, $name, $imageUrl, $habitat, $color, $description)
     {
         $this->id = $id;
         $this->name = $name;
         $this->imageUrl = $imageUrl;
-        $this->detailsRoute = $detailsRoute;
+        $this->habitat = $habitat;
+        $this->color = $color;
+        $this->description = $description;
+
     }
 
     /**
@@ -38,23 +43,6 @@ class Pokemon
     {
         $this->id = $id;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getDetailsRoute()
-    {
-        return $this->detailsRoute;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setDetailsRoute($detailsRoute)
-    {
-        $this->detailsRoute = $detailsRoute;
-    }
-
 
     /**
      * @return mixed
@@ -94,7 +82,9 @@ class Pokemon
         $array['id'] = $this->id;
         $array['name'] = $this->name;
         $array['imageURL'] = $this->imageUrl;
-        $array['detailsRoute'] = $this->detailsRoute;
+        $array['habitat'] = $this->habitat;
+        $array['color'] = $this->color;
+        $array['description'] = $this->description;
 
         return $array;
     }
