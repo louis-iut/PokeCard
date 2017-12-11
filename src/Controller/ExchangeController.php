@@ -40,4 +40,14 @@ class ExchangeController
 		$content = json_encode(array('message' => 'exchange created'));
         return new Response($content, $statutCode ,['Content-type' => 'application/json']);
     }
+
+    public function deleteAction(Request $request, Application $app)
+    {
+        $parameters = $request->attributes->all();
+        $app['repository.exchange']->delete($parameters['id']);
+
+		$statutCode = 200;
+		$content = json_encode(array('message' => 'exchange deleted'));
+        return new Response($content, $statutCode ,['Content-type' => 'application/json']);
+    }
 }

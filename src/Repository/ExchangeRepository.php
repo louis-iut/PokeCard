@@ -91,4 +91,14 @@ class ExchangeRepository
     }
 
 
+    public function delete($id)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+          ->delete('exchange')
+          ->where('id = :id')
+          ->setParameter(':id', $id);
+
+        $statement = $queryBuilder->execute();
+    }
 }

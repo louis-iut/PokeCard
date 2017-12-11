@@ -9,3 +9,4 @@ $app->get('/pokemonsID', 'App\Controller\PokemonController::getPokemonsID');
 $app->get('/exchanges', 'App\Controller\ExchangeController::getExchanges');
 $app->get('/exchange/{id}', 'App\Controller\ExchangeController::getExchangeWithID');
 $app->post('/exchange/new', 'App\Controller\ExchangeController::addAction')->bind('exchange.new');
+$app->get('/exchange/delete/{id}', 'App\Controller\ExchangeController::deleteAction')->bind('exchange.delete');
