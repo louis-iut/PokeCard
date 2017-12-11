@@ -31,4 +31,13 @@ class ExchangeController
 
         return new Response($content, $statutCode ,['Content-type' => 'application/json']);
     }
+
+    public function addAction(Request $request, Application $app)
+    {
+		$parameters = json_decode(file_get_contents('php://input'), true);
+        $association = $app['repository.exchange']->insert($parameters);
+		$statutCode = 200;
+		$content = json_encode(array('message' => 'exchange created'));
+        return new Response($content, $statutCode ,['Content-type' => 'application/json']);
+    }
 }

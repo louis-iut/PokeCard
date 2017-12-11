@@ -70,4 +70,25 @@ class ExchangeRepository
 
 
 
+    public function insert($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+          ->insert('exchange')
+          ->values(
+              array(
+                'userID' => ':userID',
+                'firstPokemonID' => ':firstPokemonID',
+                'secondPokemonID' => ':secondPokemonID',
+                'date' => ':date'
+              )
+          )
+          ->setParameter(':userID', $parameters['userID'])
+          ->setParameter(':firstPokemonID', $parameters['firstPokemonID'])
+          ->setParameter(':secondPokemonID', $parameters['secondPokemonID'])
+          ->setParameter(':date', date('Y-m-d H:i:s',time()));
+        $statement = $queryBuilder->execute();
+    }
+
+
 }
