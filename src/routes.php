@@ -12,3 +12,6 @@ $app->get('/exchange/delete/{id}', 'App\Controller\ExchangeController::deleteAct
 
 $app->get('/users', 'App\Controller\UserController::getUsers');
 $app->post('/login', 'App\Controller\UserController::login');
+
+$app->get('/user/{userID}/addPokemon/{pokemonID}', 'App\Controller\UserController::addPokemonAction');
+$app->get('/user/{userID}/pokemons', 'App\Controller\UserController::getPokemons');

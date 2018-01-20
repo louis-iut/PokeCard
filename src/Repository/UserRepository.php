@@ -87,44 +87,32 @@ class UserRepository
         $statement = $queryBuilder->execute();
     }
 
-    public function update($parameters)
+    public function getPokemons($parameters)
     {
-       /* $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
-          ->update('User')
-          ->where('id = :id')
-          ->setParameter(':id', $parameters['id']);
-
-        if ($parameters['nom']) {
-            $queryBuilder
-              ->set('nom', ':nom')
-              ->setParameter(':nom', $parameters['nom']);
-        }
-
-        if ($parameters['prenom']) {
-            $queryBuilder
-            ->set('prenom', ':prenom')
-            ->setParameter(':prenom', $parameters['prenom']);
-        }
-
-        $statement = $queryBuilder->execute();*/
+          ->select('*')
+          ->from('user_has_pokemons')
+          ->where('userID = :userID')
+          ->setParameter(':userID', $parameters);
+        $statement = $queryBuilder->execute();
+        $data = $statement->fetchAll();
+        return $data;
     }
 
-    public function insert($parameters)
+    public function insert($userID, $parameters)
     {
-    /*    $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
-          ->insert('users')
+          ->insert('user_has_pokemons')
           ->values(
               array(
-                'nom' => ':nom',
-                'prenom' => ':prenom',
+                'userID' => ':userID',
+                'pokemonID' => ':pokemonID',
               )
           )
-          ->setParameter(':nom', $parameters['$firstName'])
-          ->setParameter(':prenom', $parameters['prenom']);
+          ->setParameter(':userID', $userID)
+          ->setParameter(':pokemonID', $parameters);
         $statement = $queryBuilder->execute();
-
-        return $this->db->lastInsertId();*/
     }
 }

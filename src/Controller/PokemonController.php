@@ -53,7 +53,7 @@ class PokemonController
     {
 
         $parameters = $request->attributes->all();
-        $pokemons = $app['repository.pokemon']->getById($parameters['id'], $parameters['code']);
+        $pokemons = $app['repository.pokemon']->getDetailsById($parameters['id'], $parameters['code']);
         $content = json_encode($pokemons->toArray());
         $statutCode = 200;
 
