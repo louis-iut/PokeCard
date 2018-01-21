@@ -54,7 +54,7 @@ class PokemonRepository
        return $pokemonIDArray;
    }
 
-    public function getById($id, $code)
+    public function getDetailsById($id, $code)
     {
        $json_url = "https://pokeapi.co/api/v2/pokemon-species/{$id}/";
        $json = file_get_contents($json_url);
@@ -77,6 +77,18 @@ class PokemonRepository
        $newPokemon = new PokemonDetails($pokemonID, $selectedPokemonName, $pokemonImageURL, $habitat, $color, $description);
        return $newPokemon;
    }
+
+  public function getById($id)
+  {
+      $pokemonList = $this->getAll();
+      $pokemonID = $pokemonList[$id]['entry_number'];
+      $pokemonName = $pokemonList[$id]['pokemon_species']['name'];
+      $pokemonImageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$pokemonID}.png";
+      $pokemonDetailsRoute = "pokecard.local/index.php/en/pokemon/{$pokemonID}";
+      $newPokemon = new Pokemon($pokemonID, $pokemonName, $pokemonImageURL, $pokemonDetailsRoute);
+
+      return $newPokemon;
+  }
 
   public function getDescription($json, $code)
   {

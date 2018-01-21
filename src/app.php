@@ -20,3 +20,7 @@ $app['repository.user'] = function ($app) {
 $app['repository.pokemon'] = function ($app) {
     return new App\Repository\PokemonRepository($app['db']);
 };
+
+$app['repository.exchange'] = function ($app) {
+    return new App\Repository\ExchangeRepository($app['db']);
+};

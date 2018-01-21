@@ -50,9 +50,9 @@ class UserRepository
         $statement = $queryBuilder->execute();
         $userData = $statement->fetchAll();
 
-        /*if(!empty($userData)) {
-            return new User($userData[0]['id'], $userData[0]['$firstName'], $userData[0]['$lastName'], $userData[0]['$email'], $userData[0]['$pseudo']);
-        }*/
+       /*if(!empty($userData)) {
+           return new User($userData[0]['id'], $userData[0]['$firstName'], $userData[0]['$lastName'], $userData[0]['$email'], $userData[0]['$pseudo']);
+       }*/
 
         return $userData;
     }
@@ -84,6 +84,35 @@ class UserRepository
         $statement = $queryBuilder->execute();
 
         return $this->db->lastInsertId();
+    }
+
+    public function getPokemons($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('*')
+            ->from('user_has_pokemons')
+            ->where('userID = :userID')
+            ->setParameter(':userID', $parameters);
+        $statement = $queryBuilder->execute();
+        $data = $statement->fetchAll();
+        return $data;
+    }
+
+    public function insert($userID, $parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->insert('user_has_pokemons')
+            ->values(
+                array(
+                    'userID' => ':userID',
+                    'pokemonID' => ':pokemonID',
+                )
+            )
+            ->setParameter(':userID', $userID)
+            ->setParameter(':pokemonID', $parameters);
+        $statement = $queryBuilder->execute();
     }
 }
 
