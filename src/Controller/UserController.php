@@ -25,7 +25,7 @@ class UserController
     public function signup(Request $request, Application $app)
     {
         $parameters = $request->request->all();
-        $user = $app['repository.user']->insert($parameters['facebook_id'], $parameters['pseudo']);
+        $user = $app['repository.user']->insertUser($parameters['facebook_id'], $parameters['pseudo']);
         $content = json_encode($user);
         $statusCode = 200;
 
@@ -34,18 +34,18 @@ class UserController
 
     public function login(Request $request, Application $app) {
 
-        $parameters = json_decode(file_get_contents('php://input'), true);
+        /*$parameters = json_decode(file_get_contents('php://input'), true);
         var_dump($parameters);
         die();
         $user = $app['repository.user']->getByEmail($parameters['email']);
-        die();
+        die();*/
     }
 
 
     public function addPokemonAction(Request $request, Application $app) {
 
         $parameters = $request->attributes->all();
-        $association = $app['repository.user']->insert($parameters['userID'], $parameters['pokemonID']);
+        $association = $app['repository.user']->insertPokemon($parameters['userID'], $parameters['pokemonID']);
 
         $statutCode = 200;
         $content = json_encode(array('message' => 'pokemon added'));

@@ -32,7 +32,7 @@ class UserRepository
         $usersData = $statement->fetchAll();
         $userEntityList = array();
         foreach ($usersData as $userData) {
-            $userEntityList[$userData['id']] = new User($userData['id'], $userData['firstname'], $userData['lastname'], $userData['email'], $userData['pseudo']);
+            $userEntityList[$userData['id']] = new User($userData['id'], $userData['facebook_id'], $userData['pseudo']);
         }
 
         return $usersData;
@@ -68,7 +68,7 @@ class UserRepository
         $statement = $queryBuilder->execute();
     }
 
-    public function insert($facebookId, $pseudo)
+    public function insertUser($facebookId, $pseudo)
     {
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
@@ -99,7 +99,7 @@ class UserRepository
         return $data;
     }
 
-    public function insert($userID, $parameters)
+    public function insertPokemon($userID, $parameters)
     {
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
