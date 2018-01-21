@@ -112,19 +112,19 @@ class UserRepository
 
     public function insert($parameters)
     {
-    /*    $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
           ->insert('users')
           ->values(
               array(
-                'nom' => ':nom',
-                'prenom' => ':prenom',
+                'facebook_id' => ':facebook_id',
+                'pseudo' => ':pseudo',
               )
           )
-          ->setParameter(':nom', $parameters['$firstName'])
-          ->setParameter(':prenom', $parameters['prenom']);
+          ->setParameter(':facebook_id', $parameters['facebook_id'])
+          ->setParameter(':pseudo', $parameters['pseudo']);
         $statement = $queryBuilder->execute();
 
-        return $this->db->lastInsertId();*/
+        return $this->db->lastInsertId();
     }
 }

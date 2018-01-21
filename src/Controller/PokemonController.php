@@ -17,7 +17,7 @@ class PokemonController
         $maxPokemon = $_GET['number'];
 
         $pokemons = $app['repository.pokemon']->getAll();
-        $statutCode = 200;
+        $statusCode = 200;
         $pokemonArray = array();
 
         for ($i=($maxPokemon*$page); $i < ($maxPokemon*($page+1)); $i++) { 
@@ -42,9 +42,9 @@ class PokemonController
 
         $pokemons = $app['repository.pokemon']->getAllID();
         $content = json_encode($pokemons);
-        $statutCode = 200;
+        $statusCode = 200;
 
-        return new Response($content, $statutCode ,['Content-type' => 'application/json']);
+        return new Response($content, $statusCode ,['Content-type' => 'application/json']);
     }
 
     public function getPokemonWithID(Request $request, Application $app){
@@ -52,9 +52,9 @@ class PokemonController
         $parameters = $request->attributes->all();
         $pokemons = $app['repository.pokemon']->getById($parameters['id'], $parameters['code']);
         $content = json_encode($pokemons->toArray());
-        $statutCode = 200;
+        $statusCode = 200;
 
-        return new Response($content, $statutCode ,['Content-type' => 'application/json']);
+        return new Response($content, $statusCode ,['Content-type' => 'application/json']);
     }
 
 

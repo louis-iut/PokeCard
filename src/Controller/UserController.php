@@ -20,13 +20,14 @@ class UserController
         return new JsonResponse($app['repository.user']->getAll());
     }
 
-    public function login(Request $request, Application $app) {
+    public function signup(Request $request, Application $app)
+    {
+        $parameters = $request->attributes->all();
+        $user = $app['repository.user']->inssert($parameters['facebook_id'], $parameters['pseudo']);
+        $content = json_encode($user->toArray());
+        $statusCode = 200;
 
-        $parameters = json_decode(file_get_contents('php://input'), true);
-        var_dump($parameters);
-        die();
-        $user = $app['repository.user']->getByEmail($parameters['email']);
-        die();
+        return new Response($content, $statusCode, ['Content-type' => 'application/json']);
     }
 
 }

@@ -6,28 +6,20 @@ class User
 {
     protected $id;
 
-    protected $firstName;
-
-    protected $lastName;
-
-    protected $email;
+    protected $facebookId;
 
     protected $pseudo;
 
     /**
      * User constructor.
      * @param $id
-     * @param $firstName
-     * @param $lastName
-     * @param $email
+     * @param $facebookId
      * @param $pseudo
      */
-    public function __construct($id, $firstName, $lastName, $email, $pseudo)
+    public function __construct($id, $facebookId, $pseudo)
     {
         $this->id = $id;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->email = $email;
+        $this->facebookId = $facebookId;
         $this->pseudo = $pseudo;
     }
 
@@ -50,49 +42,17 @@ class User
     /**
      * @return mixed
      */
-    public function getFirstName()
+    public function getFacebookId()
     {
-        return $this->firstName;
+        return $this->facebookId;
     }
 
     /**
-     * @param mixed $firstName
+     * @param mixed $facebookId
      */
-    public function setFirstName($firstName)
+    public function setFacebookId($facebookId)
     {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param mixed $lastName
-     */
-    public function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
+        $this->facebookId = $facebookId;
     }
 
     /**
@@ -110,4 +70,8 @@ class User
     {
         $this->pseudo = $pseudo;
     }
+
+
+
+
 }
