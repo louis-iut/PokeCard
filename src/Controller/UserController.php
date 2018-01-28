@@ -34,11 +34,12 @@ class UserController
 
     public function login(Request $request, Application $app) {
 
-        /*$parameters = json_decode(file_get_contents('php://input'), true);
-        var_dump($parameters);
-        die();
-        $user = $app['repository.user']->getByEmail($parameters['email']);
-        die();*/
+      $parameters = $request->request->all();
+      $user = $app['repository.user']->getByFacebookId($parameters['facebook_id']);
+      $content = json_encode($user);
+      $statusCode = 200;
+
+      return new Response($content, $statusCode, ['Content-type' => 'application/json']);
     }
 
 

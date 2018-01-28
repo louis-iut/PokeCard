@@ -57,6 +57,27 @@ class UserRepository
         return $userData;
     }
 
+
+        public function getByFacebookId($id)
+        {
+            $queryBuilder = $this->db->createQueryBuilder();
+            $queryBuilder
+                ->select('u.*')
+                ->from('User', 'u')
+                ->where('facebook_id = ?')
+                ->setParameter(0, $id)
+                ->setMaxResults(1);
+            $statement = $queryBuilder->execute();
+            $userData = $statement->fetchAll();
+
+            if (empty($userData)) {
+              return $userData;
+            }
+
+
+            return $userData[0];
+        }
+
     public function delete($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();
@@ -115,4 +136,3 @@ class UserRepository
         $statement = $queryBuilder->execute();
     }
 }
-
