@@ -111,11 +111,12 @@ class UserRepository
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
             ->select('*')
-            ->from('user_has_pokemons')
-            ->where('userID = :userID')
-            ->setParameter(':userID', $parameters);
+            ->from('User_Pokemon_Association')
+            ->where('user_id = :user_id')
+            ->setParameter(':user_id', $parameters);
         $statement = $queryBuilder->execute();
         $data = $statement->fetchAll();
+
         return $data;
     }
 

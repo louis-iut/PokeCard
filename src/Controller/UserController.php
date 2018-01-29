@@ -59,15 +59,13 @@ class UserController
 
     public function getPokemons(Request $request, Application $app)
     {
-
         $parameters = $request->attributes->all();
-        $pokemons = $app['repository.user']->getPokemons($parameters['userID']);
 
+        $pokemons = $app['repository.user']->getPokemons($parameters['userID']);
         $pokemonsArray = array();
         foreach ($pokemons as $pokemon) {
-            $newPokemon = $app['repository.pokemon']->getById($pokemon['pokemonID'], "en");
+            $newPokemon = $app['repository.pokemon']->getById($pokemon['pokemon_id'], "en");
             array_push($pokemonsArray, $newPokemon->toArray());
-
         }
 
         $statutCode = 200;
