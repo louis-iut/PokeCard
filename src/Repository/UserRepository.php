@@ -50,33 +50,32 @@ class UserRepository
         $statement = $queryBuilder->execute();
         $userData = $statement->fetchAll();
 
-       /*if(!empty($userData)) {
-           return new User($userData[0]['id'], $userData[0]['$firstName'], $userData[0]['$lastName'], $userData[0]['$email'], $userData[0]['$pseudo']);
-       }*/
+        if (empty($userData)) {
+            return null;
+        }
 
-        return $userData;
+        return $userData[0];
     }
 
 
-        public function getByFacebookId($id)
-        {
-            $queryBuilder = $this->db->createQueryBuilder();
-            $queryBuilder
-                ->select('u.*')
-                ->from('User', 'u')
-                ->where('facebook_id = ?')
-                ->setParameter(0, $id)
-                ->setMaxResults(1);
-            $statement = $queryBuilder->execute();
-            $userData = $statement->fetchAll();
+    public function getByFacebookId($id)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('u.*')
+            ->from('User', 'u')
+            ->where('facebook_id = ?')
+            ->setParameter(0, $id)
+            ->setMaxResults(1);
+        $statement = $queryBuilder->execute();
+        $userData = $statement->fetchAll();
 
-            if (empty($userData)) {
-              return $userData;
-            }
-
-
-            return $userData[0];
+        if (empty($userData)) {
+            return null;
         }
+
+        return $userData[0];
+    }
 
     public function delete($id)
     {
@@ -104,7 +103,7 @@ class UserRepository
             ->setParameter(':pseudo', $pseudo);
         $statement = $queryBuilder->execute();
 
-        return $this->db->lastInsertId();
+        return $this->getById($this->db->lastInsertId());
     }
 
     public function getPokemons($parameters)

@@ -9,7 +9,6 @@
 namespace App\Controller;
 
 use Silex\Application;
-use App\Entity\Pokemon;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +23,8 @@ class UserController
 
     public function signup(Request $request, Application $app)
     {
+        $data = json_decode($request->getContent(), true);
+        $request->request->replace(is_array($data) ? $data : array());
         $parameters = $request->request->all();
         $user = $app['repository.user']->insertUser($parameters['facebook_id'], $parameters['pseudo']);
         $content = json_encode($user);
@@ -32,28 +33,32 @@ class UserController
         return new Response($content, $statusCode, ['Content-type' => 'application/json']);
     }
 
-    public function login(Request $request, Application $app) {
+    public function login(Request $request, Application $app)
+    {
+        $data = json_decode($request->getContent(), true);
+        $request->request->replace(is_array($data) ? $data : array());
+        $parameters = $request->request->all();
+        $user = $app['repository.user']->getByFacebookId($parameters['facebook_id']);
+        $content = json_encode($user);
+        $statusCode = 200;
 
-      $parameters = $request->request->all();
-      $user = $app['repository.user']->getByFacebookId($parameters['facebook_id']);
-      $content = json_encode($user);
-      $statusCode = 200;
-
-      return new Response($content, $statusCode, ['Content-type' => 'application/json']);
+        return new Response($content, $statusCode, ['Content-type' => 'application/json']);
     }
 
 
-    public function addPokemonAction(Request $request, Application $app) {
+    public function addPokemonAction(Request $request, Application $app)
+    {
 
         $parameters = $request->attributes->all();
         $association = $app['repository.user']->insertPokemon($parameters['userID'], $parameters['pokemonID']);
 
         $statutCode = 200;
         $content = json_encode(array('message' => 'pokemon added'));
-        return new Response($content, $statutCode ,['Content-type' => 'application/json']);
+        return new Response($content, $statutCode, ['Content-type' => 'application/json']);
     }
 
-    public function getPokemons(Request $request, Application $app) {
+    public function getPokemons(Request $request, Application $app)
+    {
 
         $parameters = $request->attributes->all();
         $pokemons = $app['repository.user']->getPokemons($parameters['userID']);
@@ -67,7 +72,7 @@ class UserController
 
         $statutCode = 200;
         $content = json_encode($pokemonsArray);
-        return new Response($content, $statutCode ,['Content-type' => 'application/json']);
+        return new Response($content, $statutCode, ['Content-type' => 'application/json']);
     }
 
 }

@@ -6,11 +6,11 @@ class Exchange
 {
 
     protected $id;
-	protected $userID;
-	protected $firstPokemonID;
-	protected $secondPokemonID;
-	protected $date;
-	
+    protected $userID;
+    protected $firstPokemonID;
+    protected $secondPokemonID;
+    protected $date;
+
     public function __construct($id, $userID, $firstPokemonID, $secondPokemonID, $date)
     {
         $this->id = $id;
@@ -18,7 +18,6 @@ class Exchange
         $this->firstPokemonID = $firstPokemonID;
         $this->secondPokemonID = $secondPokemonID;
         $this->date = $date;
-
     }
 
     public function toArray()
