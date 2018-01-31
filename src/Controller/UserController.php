@@ -21,11 +21,28 @@ class UserController
         return new JsonResponse($app['repository.user']->getAll());
     }
 
-    public function signup(Request $request, Application $app)
+    public function signUp(Request $request, Application $app)
     {
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
         $parameters = $request->request->all();
+
+        $user = $app['repository.user']->getByFacebookId($parameters['facebook_id']);
+        if ($user) {
+            $content = "facebook_id already exist in DB";
+            $statusCode = 501;
+
+            return new Response($content, $statusCode, array($statusCode, $content));
+        }
+
+        $user = $app['repository.user']->getByPseudo($parameters['pseudo']);
+        if ($user) {
+            $content = "pseudo already exist in DB";
+            $statusCode = 502;
+
+            return new Response($content, $statusCode, array($statusCode, $content));
+        }
+
         $user = $app['repository.user']->insertUser($parameters['facebook_id'], $parameters['pseudo']);
         $content = json_encode($user);
         $statusCode = 200;
@@ -33,12 +50,21 @@ class UserController
         return new Response($content, $statusCode, ['Content-type' => 'application/json']);
     }
 
-    public function login(Request $request, Application $app)
+    public function signIn(Request $request, Application $app)
     {
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
         $parameters = $request->request->all();
         $user = $app['repository.user']->getByFacebookId($parameters['facebook_id']);
+
+        if (!$user) {
+            $content = "Error authentication";
+            $statusCode = 401;
+
+            return new Response($content, $statusCode, array($statusCode, $content));
+        }
+
+
         $content = json_encode($user);
         $statusCode = 200;
 

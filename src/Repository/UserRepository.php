@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\DBAL\Connection;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * User repository.
@@ -77,6 +78,24 @@ class UserRepository
         return $userData[0];
     }
 
+    public function getByPseudo($pseudo) {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->select('u.*')
+            ->from('User', 'u')
+            ->where('pseudo = ?')
+            ->setParameter(0, $pseudo)
+            ->setMaxResults(1);
+        $statement = $queryBuilder->execute();
+        $userData = $statement->fetchAll();
+
+        if (empty($userData)) {
+            return null;
+        }
+
+        return $userData[0];
+    }
+
     public function delete($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();
@@ -101,7 +120,7 @@ class UserRepository
             )
             ->setParameter(':facebook_id', $facebookId)
             ->setParameter(':pseudo', $pseudo);
-        $statement = $queryBuilder->execute();
+       $queryBuilder->execute();
 
         return $this->getById($this->db->lastInsertId());
     }
