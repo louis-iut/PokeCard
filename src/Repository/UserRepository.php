@@ -124,11 +124,11 @@ class UserRepository
     {
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
-            ->insert('user_has_pokemons')
+            ->insert('User_Pokemon_Association')
             ->values(
                 array(
-                    'userID' => ':userID',
-                    'pokemonID' => ':pokemonID',
+                    'user_id' => ':userID',
+                    'pokemon_id' => ':pokemonID',
                 )
             )
             ->setParameter(':userID', $userID)
