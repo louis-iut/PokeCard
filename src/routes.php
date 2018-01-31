@@ -1,8 +1,8 @@
 <?php
 
 $app->get('/users', 'App\Controller\UserController::getUsers');
-$app->post('/signup', 'App\Controller\UserController::signup');
-$app->post('/login', 'App\Controller\UserController::login');
+$app->post('/sign/up', 'App\Controller\UserController::signUp');
+$app->post('/sign/in', 'App\Controller\UserController::signIn');
 
 $app->get('/user/{userID}/addPokemon/{pokemonID}', 'App\Controller\UserController::addPokemonAction');
 $app->get('/user/{userID}/pokemons', 'App\Controller\UserController::getPokemons');
