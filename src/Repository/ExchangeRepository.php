@@ -81,7 +81,6 @@ class ExchangeRepository
         $statement = $queryBuilder->execute();
     }
 
-
     public function delete($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();
@@ -93,3 +92,8 @@ class ExchangeRepository
         $statement = $queryBuilder->execute();
     }
 }
+
+
+
+
+

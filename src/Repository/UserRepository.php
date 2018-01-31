@@ -135,4 +135,18 @@ class UserRepository
             ->setParameter(':pokemonID', $parameters);
         $statement = $queryBuilder->execute();
     }
+
+    public function removePokemon($user_id, $pokemon_id)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+            ->delete('User_Pokemon_Association')
+            ->from('User_Pokemon_Association')
+            ->where('user_id = :user_id')
+            ->andWhere('pokemon_id = :pokemon_id')
+            ->setParameter(':user_id', $user_id)
+            ->setParameter(':pokemon_id', $pokemon_id)
+            ->setMaxResults(1);
+        $statement = $queryBuilder->execute();
+    }
 }

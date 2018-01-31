@@ -19,7 +19,6 @@ class ExchangeController
         return new Response($content, $statutCode, ['Content-type' => 'application/json']);
     }
 
-
     public function getExchangeWithID(Request $request, Application $app)
     {
 
@@ -49,4 +48,22 @@ class ExchangeController
         $content = json_encode(array('message' => 'exchange deleted'));
         return new Response($content, $statutCode, ['Content-type' => 'application/json']);
     }
+
+    public function sendGift(Request $request, Application $app)
+    {
+        $parameters = json_decode(file_get_contents('php://input'), true);
+
+        $association = $app['repository.user']->insertPokemon($parameters['user_id'], $parameters['pokemon_id']);
+        $association = $app['repository.user']->removePokemon($parameters['current_user'], $parameters['pokemon_id']);
+
+        $statutCode = 200;
+        $content = json_encode(array('message' => 'Gift sent !'));
+        return new Response($content, $statutCode, ['Content-type' => 'application/json']);
+
+    }
 }
+
+
+
+
+
