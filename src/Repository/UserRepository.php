@@ -168,4 +168,19 @@ class UserRepository
             ->setMaxResults(1);
         $statement = $queryBuilder->execute();
     }
+
+    public function userHavePokemon($userID, $pokemonID)
+    {
+        $currentUser = $this->getById($userID);
+        $pokemons = $this->getPokemons($userID);
+
+        foreach ($pokemons as $pokemon) {
+            if($pokemon["pokemon_id"] == $pokemonID) {
+               return true;
+            }
+        }
+
+        return false;
+    }
+
 }

@@ -33,6 +33,16 @@ class ExchangeController
     public function addAction(Request $request, Application $app)
     {
         $parameters = json_decode(file_get_contents('php://input'), true);
+
+        $pokemon1 = $app['repository.pokemon']->getById($parameters['firstPokemonID']);
+        $pokemon2 = $app['repository.pokemon']->getById($parameters['secondPokemonID']);
+
+        if(!$pokemon1 || !$pokemon2) {
+            $statutCode = 400;
+            $content = json_encode(array('status_code' => '3', 'message' => 'pokemon doesn\'t exist'));
+            return new Response($content, $statutCode, ['Content-type' => 'application/json']);
+        }
+
         $association = $app['repository.exchange']->insert($parameters);
         
         $statutCode = 200;
@@ -43,10 +53,65 @@ class ExchangeController
     public function deleteAction(Request $request, Application $app)
     {
         $parameters = $request->attributes->all();
+
         $app['repository.exchange']->delete($parameters['id']);
 
         $statutCode = 200;
         $content = json_encode(array('message' => 'exchange deleted'));
+        return new Response($content, $statutCode, ['Content-type' => 'application/json']);
+    }
+
+    public function validateExchangeWithID(Request $request, Application $app) {
+        $parameters = $request->attributes->all();
+        $exchange = $app['repository.exchange']->getById($parameters['id']);
+        $body = json_decode(file_get_contents('php://input'), true);
+
+        $userID = ($exchange->toArray())['userID'];
+        $currentUser = $app['repository.user']->getById($body['currentUserId']);
+
+        $firstPokemonID = ($exchange->toArray())['firstPokemonID'];
+        $secondPokemonID = ($exchange->toArray())['secondPokemonID'];
+
+        if(!$exchange) {
+            $statutCode = 404;
+            $content = json_encode(array('message' => 'exchange user doesn\'t exist'));
+            return new Response($content, $statutCode, ['Content-type' => 'application/json']);
+        }
+
+        if(!$currentUser) {
+            $statutCode = 400;
+            $content = json_encode(array('status_code' => '1', 'message' => 'current user doesn\'t exist'));
+            return new Response($content, $statutCode, ['Content-type' => 'application/json']);
+        }
+
+        $userExchange = $app['repository.user']->getById($userID);
+
+        if(!$userExchange) {
+            $statutCode = 400;
+            $content = json_encode(array('status_code' => '2', 'message' => 'user doesn\'t exist'));
+            return new Response($content, $statutCode, ['Content-type' => 'application/json']);
+            //Supprimer l'échange ?
+        }
+
+        if(!$app['repository.user']->userHavePokemon($userID, $firstPokemonID)) {
+            $statutCode = 400;
+            $content = json_encode(array('status_code' => '6', 'message' => 'user doesn\'t have pokemon'));
+            return new Response($content, $statutCode, ['Content-type' => 'application/json']);
+        }
+
+         if(!$app['repository.user']->userHavePokemon($body['currentUserId'], $secondPokemonID)) {
+            $statutCode = 400;
+            $content = json_encode(array('status_code' => '7', 'message' => 'current user doesn\'t have pokemon'));
+            return new Response($content, $statutCode, ['Content-type' => 'application/json']);
+        }
+
+        $association = $app['repository.user']->insertPokemon($userID, $secondPokemonID);
+        $association = $app['repository.user']->insertPokemon($body['currentUserId'], $firstPokemonID);
+        $association = $app['repository.user']->removePokemon($userID, $firstPokemonID);
+        $association = $app['repository.user']->removePokemon($body['currentUserId'], $secondPokemonID);
+
+        $statutCode = 200;
+        $content = json_encode(array('message' => 'exchange validate'));
         return new Response($content, $statutCode, ['Content-type' => 'application/json']);
     }
 
@@ -62,7 +127,7 @@ class ExchangeController
 
         $pokemons = $app['repository.user']->getPokemons($parameters['current_user']);
 
-         if(!$currentUser) {
+        if(!$currentUser) {
             $statutCode = 400;
             $content = json_encode(array('status_code' => '1', 'message' => 'current user doesn\'t exist'));
             return new Response($content, $statutCode, ['Content-type' => 'application/json']);
@@ -95,8 +160,6 @@ class ExchangeController
         $statutCode = 400;
         $content = json_encode(array('status_code' => '4', 'message' => 'current user doesn\'t have this pokemon'));
         return new Response($content, $statutCode, ['Content-type' => 'application/json']);
-       
-
     }
 }
 
