@@ -78,6 +78,11 @@ class PokemonRepository
     public function getById($id)
     {
         $pokemonList = $this->getAll();
+
+        if(!isset($pokemonList[$id])) {
+            return null;
+        }
+
         $pokemonID = $pokemonList[$id]['entry_number'];
         $pokemonName = $pokemonList[$id]['pokemon_species']['name'];
         $pokemonImageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$pokemonID}.png";

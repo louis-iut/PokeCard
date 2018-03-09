@@ -33,6 +33,7 @@ class ExchangeController
     {
         $parameters = json_decode(file_get_contents('php://input'), true);
         $association = $app['repository.exchange']->insert($parameters);
+        
         $statutCode = 200;
         $content = json_encode(array('message' => 'exchange created'));
         return new Response($content, $statutCode, ['Content-type' => 'application/json']);
@@ -52,8 +53,23 @@ class ExchangeController
     {
         $parameters = json_decode(file_get_contents('php://input'), true);
 
-        
+        //Check si l'utilisateur a le pokemon
 
+        $user = $app['repository.user']->getById($parameters['user_id']);
+        $currentUser = $app['repository.user']->getById($parameters['current_user']);
+        $pokemon = $app['repository.pokemon']->getById($parameters['pokemon_id']);
+
+        if(!$user || !$currentUser) {
+            $statutCode = 400;
+            $content = json_encode(array('status_code' => '1', 'message' => 'user doesn\'t exist'));
+            return new Response($content, $statutCode, ['Content-type' => 'application/json']);
+        }
+
+        if(!$pokemon) {
+            $statutCode = 400;
+            $content = json_encode(array('status_code' => '2', 'message' => 'pokemon doesn\'t exist'));
+            return new Response($content, $statutCode, ['Content-type' => 'application/json']);
+        }
 
         $association = $app['repository.user']->insertPokemon($parameters['user_id'], $parameters['pokemon_id']);
         $association = $app['repository.user']->removePokemon($parameters['current_user'], $parameters['pokemon_id']);
