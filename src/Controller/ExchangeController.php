@@ -21,7 +21,6 @@ class ExchangeController
 
     public function getExchangeWithID(Request $request, Application $app)
     {
-
         $parameters = $request->attributes->all();
         $exchange = $app['repository.exchange']->getById($parameters['id']);
         $content = json_encode($exchange->toArray());
@@ -52,6 +51,9 @@ class ExchangeController
     public function sendGift(Request $request, Application $app)
     {
         $parameters = json_decode(file_get_contents('php://input'), true);
+
+        
+
 
         $association = $app['repository.user']->insertPokemon($parameters['user_id'], $parameters['pokemon_id']);
         $association = $app['repository.user']->removePokemon($parameters['current_user'], $parameters['pokemon_id']);

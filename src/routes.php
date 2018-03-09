@@ -15,4 +15,7 @@ $app->get('/exchanges', 'App\Controller\ExchangeController::getExchanges');
 $app->get('/exchange/{id}', 'App\Controller\ExchangeController::getExchangeWithID');
 $app->post('/exchange/new', 'App\Controller\ExchangeController::addAction');
 $app->delete('/exchange/delete/{id}', 'App\Controller\ExchangeController::deleteAction');
+
+$app->get('/ping', 'App\Controller\PokemonController::ping');
+
 $app->post('/gift', 'App\Controller\ExchangeController::sendGift');

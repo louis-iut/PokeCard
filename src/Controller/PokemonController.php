@@ -60,5 +60,22 @@ class PokemonController
         return new Response($content, $statutCode, ['Content-type' => 'application/json']);
     }
 
+    public function ping(Request $request, Application $app)
+    {
+        $statutCode = 200;
+        $content = json_encode(array('message' => 'pong'));
+        return new Response($content, $statutCode, ['Content-type' => 'application/json']);    
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
