@@ -83,8 +83,8 @@ class PokemonRepository
             return null;
         }
 
-        $pokemonID = $pokemonList[$id]['entry_number'];
-        $pokemonName = $pokemonList[$id]['pokemon_species']['name'];
+        $pokemonID = $pokemonList[$id-1]['entry_number'];
+        $pokemonName = $pokemonList[$id-1]['pokemon_species']['name'];
         $pokemonImageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{$pokemonID}.png";
         $pokemonDetailsRoute = "pokecard.local/index.php/en/pokemon/{$pokemonID}";
         $newPokemon = new Pokemon($pokemonID, $pokemonName, $pokemonImageURL, $pokemonDetailsRoute);
