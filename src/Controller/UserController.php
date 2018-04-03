@@ -47,6 +47,14 @@ class UserController
         $content = json_encode($user);
         $statusCode = 200;
 
+        $pokemonIds = $app['repository.pokemon']->getAllID();
+        $lastID = intval(end($pokemonIds));
+
+        for ($i=0; $i < 10; $i++) { 
+            $pokemonId = rand(1, $lastID);
+            $app['repository.user']->insertPokemon($user["id"], $pokemonId);
+        }
+
         return new Response($content, $statusCode, ['Content-type' => 'application/json']);
     }
 
@@ -89,9 +97,15 @@ class UserController
 
         $pokemons = $app['repository.user']->getPokemons($parameters['userID']);
         $pokemonsArray = array();
+
         foreach ($pokemons as $pokemon) {
+            
             $newPokemon = $app['repository.pokemon']->getById($pokemon['pokemon_id'], "en");
-            array_push($pokemonsArray, $newPokemon->toArray());
+            
+            if ($newPokemon != NULL) {
+                $serializablePokemon = $newPokemon->toArray();
+                array_push($pokemonsArray, $serializablePokemon);
+            }
         }
 
         $statutCode = 200;
