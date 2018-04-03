@@ -7,7 +7,7 @@
 #
 # Hôte: 127.0.0.1 (MySQL 5.6.35)
 # Base de données: pokecard
-# Temps de génération: 2018-03-28 07:15:14 +0000
+# Temps de génération: 2018-04-03 19:05:53 +0000
 # ************************************************************
 
 
@@ -50,12 +50,12 @@ VALUES
 UNLOCK TABLES;
 
 
-# Affichage de la table User
+# Affichage de la table user
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS `user`;
 
-CREATE TABLE `User` (
+CREATE TABLE `user` (
   `facebook_id` varchar(20) NOT NULL DEFAULT '',
   `pseudo` varchar(50) NOT NULL DEFAULT '',
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -64,10 +64,10 @@ CREATE TABLE `User` (
   UNIQUE KEY `facebook_id` (`facebook_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `User` WRITE;
-/*!40000 ALTER TABLE `User` DISABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
 
-INSERT INTO `User` (`facebook_id`, `pseudo`, `id`)
+INSERT INTO `user` (`facebook_id`, `pseudo`, `id`)
 VALUES
 	('1','allo',3),
 	('12','alloa',5),
@@ -76,9 +76,9 @@ VALUES
 	('568811910118584','plopp',11),
 	('11111','plopppp',19),
 	('1234567890','AZERTYUIK',20),
-	('106725906827895','jeanmicheltest',22);
+	('106725906827895','JeanMichelTest',30);
 
-/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -100,9 +100,20 @@ LOCK TABLES `User_Pokemon_Association` WRITE;
 INSERT INTO `User_Pokemon_Association` (`id`, `user_id`, `pokemon_id`)
 VALUES
 	(5,3,2147483647),
-	(6,5,2),
-	(9,5,2),
-	(10,11,1);
+	(30,3,600),
+	(31,3,2),
+	(32,3,67),
+	(33,20,98),
+	(55,30,709),
+	(56,30,413),
+	(57,30,360),
+	(58,30,315),
+	(59,30,28),
+	(60,30,232),
+	(61,30,245),
+	(62,30,480),
+	(63,30,429),
+	(64,30,330);
 
 /*!40000 ALTER TABLE `User_Pokemon_Association` ENABLE KEYS */;
 UNLOCK TABLES;
